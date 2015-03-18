@@ -47,6 +47,7 @@ typedef struct {
 /* $end rio_t */
 
 /* External variables */
+extern int error;       /* defined by error.h */
 extern int h_errno;    /* Defined by BIND for DNS errors */ 
 extern char **environ; /* Defined by libc */
 

@@ -760,6 +760,7 @@ int open_clientfd(char *hostname, int port)
 /* $begin open_listenfd */
 int open_listenfd(int port) 
 {
+	printf("this is openlisenfd function \n");
     int listenfd, optval=1;
     struct sockaddr_in serveraddr;
   
@@ -778,8 +779,11 @@ int open_listenfd(int port)
     serveraddr.sin_family = AF_INET; 
     serveraddr.sin_addr.s_addr = htonl(INADDR_ANY); 
     serveraddr.sin_port = htons((unsigned short)port); 
+
     if (bind(listenfd, (SA *)&serveraddr, sizeof(serveraddr)) < 0)
 	return -1;
+
+	printf("server ip:port %s:%d\n", inet_ntoa(serveraddr.sin_addr), ntohs(serveraddr.sin_port));
 
     /* Make it a listening socket ready to accept connection requests */
     if (listen(listenfd, LISTENQ) < 0)
@@ -794,6 +798,7 @@ int open_listenfd(int port)
 int Open_clientfd(char *hostname, int port) 
 {
     int rc;
+	printf("this is Open_clientfd\n");
 
     if ((rc = open_clientfd(hostname, port)) < 0) {
 	if (rc == -1)
